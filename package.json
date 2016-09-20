@@ -2,7 +2,7 @@
   "name": "skill-sharing-site",
   "version": "1.0.0",
   "description": "A skill-sharing meeting is an event where people with a shared interest come together and give small, informal presentations about things they know",
-  "main": "index.js",
+  "main": "skillsharing_server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

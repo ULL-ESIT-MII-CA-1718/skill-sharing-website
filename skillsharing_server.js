@@ -57,7 +57,7 @@ function readStreamAsJSON(stream, callback){
     });
 }
 
-route.add("PUT", /^\/talks\/([^\/]+)$/,
+router.add("PUT", /^\/talks\/([^\/]+)$/,
         function(request, response, title){
 readStreamAsJSON(request, function(error, talk){
     if(error){
@@ -72,7 +72,7 @@ readStreamAsJSON(request, function(error, talk){
         presenter: talk.presenter,
         summary: talk.summary,
         comments: [] };
-    registreChange(title);
+    registerChange(title);
     respond(response, 204, null);
     }
   });
@@ -99,12 +99,12 @@ router.add("POST", /^\talks\/([^\/]+)\/comments$/,
 
 function sendTalks(talk, response){
     respondJSON(response, 200, {
-        serverTime: Data.now(),
+        serverTime: Date.now(),
         talks: talks
     });
 }
 
-router.add("GET", /^\/talks$/, function(request, reponse){
+router.add("GET", /^\/talks$/, function(request, response){
     var query = require("url").parse(request.url, true).query;
     if(query.changesSince == null){
         var list = [];

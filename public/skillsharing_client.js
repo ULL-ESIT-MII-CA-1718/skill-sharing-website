@@ -37,24 +37,23 @@ function reportError(error){
 var talkDiv = document.querySelector("#talks");
 var shownTalks = Object.create(null);
 
-function displayTalks(talks){
-    talks.forEach(function(talk){
-        var shown = shownTalks[talk.title];
-        if(talk.deleted){
-            if(shown){
-            talkDiv.removeChild(shown);
-            delete shownTalks[talk.title];
-        }
+function displayTalks(talks) {
+  talks.forEach(function(talk) {
+    var shown = shownTalks[talk.title];
+    if (talk.deleted) {
+      if (shown) {
+        talkDiv.removeChild(shown);
+        delete shownTalks[talk.title];
+      }
     } else {
-        var node = drawnTalk(talk);
-        if(shown)
-            talkDiv.replaceChild(node, shown);
-        else
-            talkDiv.appendChild(node);
-        shownTalks[talk.title] = node;
+      var node = drawTalk(talk);
+      if (shown)
+        talkDiv.replaceChild(node, shown);
+      else
+        talkDiv.appendChild(node);
+      shownTalks[talk.title] = node;
     }
   });
-
 }
 
 function instantiateTemplate(name, values){
@@ -129,13 +128,13 @@ var talkForm = document.querySelector("#newtalk");
 
 talkForm.addEventListener("submit", function(event){
     event.preventDefault();
-    reqiest({pathname: talkURL(talkForm.elements.title.value),
+    request({pathname: talkURL(talkForm.elements.title.value),
              method: "PUT",
              body: JSON.stringify({
                  presenter: nameField.value,
                  summary: talkForm.elements.summary.value
              })}, reportError);
-    talkForm.rest();
+    talkForm.reset();
 });
 
 function waitForChanges(){
